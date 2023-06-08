@@ -1,0 +1,106 @@
+spring:
+  # 应用名称
+  application:
+    name: luntan
+
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+
+  datasource:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://139.224.112.5:3306/luntan?serverTimezone=Asia/Shanghai&characterEncoding=UTF8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+          username: root
+          password: Kamiyahiroshi1!
+
+  #文件上传
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+
+  redis:
+    url: 139.224.112.5
+    password: 1234
+    port: 6379
+    timeout: 6000
+    jedis:
+      pool:
+        max-active: 50
+        max-idle: 20
+        min-idle: 2
+
+  #rabbitmq配置
+  rabbitmq:
+    host: 139.224.112.5
+    port: 5672
+    username: admin
+    password: 111111
+    virtualHost: /
+
+  profiles:
+    active: dev
+#    active: prod
+  mail:
+    # 邮件服务器地址
+    host: smtp.qq.com
+    # 协议 默认就是smtp
+    protocol: smtp
+    # 编码格式 默认就是utf-8
+    default-encoding: utf-8
+    # 发件人邮箱
+    username: 1491310526@qq.com
+    # 授权码 不是邮箱密码
+    password: oeisbvikqnefgegd
+
+    # smtp的指定端口 使用465要将protocol改为smtps
+    port: 587
+    # 设置开启ssl
+    properties:
+      mail:
+        stmp:
+          ssl:
+            enable: true
+
+  #  cloud:
+#    sentinel:
+#      transport:
+#        port: 8082
+#        dashboard: localhost:8080
+#    nacos:
+#      discovery:
+#        server-addr: localhost:8848
+  elasticsearch:
+    rest:
+      uris: 139.224.112.5:9200
+      connection-timeout: 600
+
+# 应用服务 WEB 访问端口
+server:
+  port: 8081
+
+#下面这些内容是为了让MyBatis映射
+#指定Mybatis的Mapper文件
+mybatis-plus:
+  mapper-locations: classpath:mapper/*xml
+  type-aliases-package: com.abc.luntan.mybatis.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#日志等级
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.yxz.wulibibiji: info
+
+
+#七牛配置
+qiniu:
+  AccessKey: Zwgf1Y_qAVMFibr88KT5MVtjQ5bpzKvDncHkXTLs
+  SecretKey: 6kPp4UfUJ7VUIzNf6PiE3ivzqsmsNLlLFWK21VNe
+  Bucket: zxde2014
+  cdn:
+    prefix: 
+
+sensitive:
+  filename: dict.txt

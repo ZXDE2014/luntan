@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.luntan.mapper.FirstcommentMapper">
+
+    <resultMap id="BaseResultMap" type="com.abc.luntan.entity.Firstcomment">
+            <id property="firstCommentId" column="first_comment_id" jdbcType="BIGINT"/>
+            <result property="firstCommentArticleId" column="first_comment_article_id" jdbcType="INTEGER"/>
+            <result property="firstCommentUserId" column="first_comment_user_id" jdbcType="VARCHAR"/>
+            <result property="firstCommentContent" column="first_comment_content" jdbcType="VARCHAR"/>
+            <result property="firstCommentLikeCount" column="first_comment_like_count" jdbcType="INTEGER"/>
+            <result property="firstCommentCount" column="first_comment_count" jdbcType="INTEGER"/>
+            <result property="firstCommentCreatedTime" column="first_comment_created_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        first_comment_id,first_comment_article_id,first_comment_user_id,
+        first_comment_content,first_comment_like_count,first_comment_count,
+        first_comment_created_time
+    </sql>
+
+
+    <select id="listJoinInfoPages" resultType="com.abc.luntan.entity.Firstcomment">
+        SELECT Base_Column_List,nickname as `name`, avatar
+        FROM `firstComment` LEFT JOIN `user` ON user.user_id=firstComment.first_comment_user_id ${ew.customSqlSegment}
+    </select>
+</mapper>
